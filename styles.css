@@ -1,0 +1,410 @@
+/* Custom CSS for Student ERP System */
+
+:root {
+    --primary-color: #000000;
+    --secondary-color: #6c757d;
+    --success-color: #198754;
+    --info-color: #0dcaf0;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --purple-color: #6f42c1;
+    --dark-color: #212529;
+    --light-color: #f8f9fa;
+    --border-radius: 12px;
+    --box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    --transition: all 0.3s ease-in-out;
+}
+
+/* Dark theme variables */
+[data-theme="dark"] {
+    /* color:#ffff; */
+    --bs-body-bg: #1a1d29;
+    --bs-body-color: #ffffff;
+    --bs-card-bg: #2d3748;
+    --bs-border-color: #4a5568;
+}
+
+/* Global Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: var(--transition);
+}
+
+[data-theme="dark"] body {
+    background-color: var(--dark-color);
+    color: var(--bs-body-color);
+}
+
+[data-theme="dark"] .card  {
+    background-color: var(--bs-body-bg);
+    border-color: var(--bs-body-color);
+    color: var(--bs-body-color);
+}
+
+[data-theme="dark"] .text-muted  {
+    color:#bbb  !important;
+}
+
+[data-theme="dark"] .modal-content {
+    background-color: var(--bs-card-bg);
+    color: var(--bs-body-color);
+}
+
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .form-select {
+    background-color: #4a5568;
+    border-color: var(--bs-border-color);
+    color: var(--bs-body-color);
+}
+
+[data-theme="dark"] .dropdown-menu {
+    background-color: var(--bs-card-bg);
+    border-color: var(--bs-border-color);
+}
+
+[data-theme="dark"] .dropdown-item {
+    color: var(--bs-body-color);
+}
+
+[data-theme="dark"] .dropdown-item:hover {
+    background-color: #4a5568;
+}
+
+/* Navigation Styles */
+
+
+.navbar-brand {
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+}
+
+/* Content Sections */
+.content-section {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Stat Cards */
+.stat-card {
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    overflow: hidden;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.bg-purple {
+    background-color: var(--purple-color) !important;
+}
+
+/* Assignment and Grade Items */
+.assignment-item,
+.grade-item {
+    transition: var(--transition);
+    border: 1px solid #e9ecef !important;
+}
+
+.assignment-item:hover,
+.grade-item:hover {
+    background-color: #f8f9fa !important;
+    transform: translateX(5px);
+}
+
+[data-theme="dark"] .assignment-item,
+[data-theme="dark"] .grade-item {
+    border-color: var(--bs-border-color) !important;
+}
+
+[data-theme="dark"] .assignment-item:hover,
+[data-theme="dark"] .grade-item:hover {
+    background-color: #4a5568 !important;
+}
+
+/* Cards */
+.card {
+    border-radius: var(--border-radius);
+    border: none;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+}
+
+.card:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    background-color: transparent !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    font-weight: 600;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Progress Bars */
+.progress {
+    height: 8px;
+    border-radius: 10px;
+    background-color: #e9ecef;
+}
+
+.progress-bar {
+    border-radius: 10px;
+    transition: width 1s ease-in-out;
+}
+
+/* Badges */
+.badge {
+    font-weight: 500;
+    border-radius: 6px;
+}
+
+/* Assignment Cards */
+.assignment-card {
+    transition: var(--transition);
+    border-radius: var(--border-radius);
+}
+
+.assignment-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.assignment-status {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+/* Certificate Cards */
+.certificate-card {
+    transition: var(--transition);
+    border-radius: var(--border-radius);
+    position: relative;
+    overflow: hidden;
+}
+
+.certificate-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.certificate-status {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+/* Notification Dropdown */
+.notification-dropdown {
+    width: 350px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.notification-dropdown .dropdown-item {
+    border-bottom: 1px solid #eee;
+    padding: 1rem;
+}
+
+.notification-dropdown .dropdown-item:last-child {
+    border-bottom: none;
+}
+
+/* Loading Animation */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Subject Progress Item */
+.subject-progress {
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    border: 1px solid #e9ecef;
+    margin-bottom: 1rem;
+    transition: var(--transition);
+}
+
+.subject-progress:hover {
+    border-color: var(--primary-color);
+    background-color: #f8f9fa;
+}
+
+[data-theme="dark"] .subject-progress {
+    border-color: var(--bs-border-color);
+    background-color: var(--bs-card-bg);
+}
+
+[data-theme="dark"] .subject-progress:hover {
+    background-color: #4a5568;
+}
+
+.subject-grade-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .stat-card {
+        margin-bottom: 1rem;
+    }
+    
+    .display-6 {
+        font-size: 2rem;
+    }
+    
+    .notification-dropdown {
+        width: 300px;
+    }
+}
+
+@media (max-width: 576px) {
+    .container-fluid {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    .stat-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+}
+
+/* Custom animations */
+@keyframes slideInUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.animate-slide-up {
+    animation: slideInUp 0.6s ease-out;
+}
+
+.animate-pulse {
+    animation: pulse 2s infinite;
+}
+
+/* Chart containers */
+.chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+}
+
+/* Form enhancements */
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+[data-theme="dark"] .form-control:focus,
+[data-theme="dark"] .form-select:focus {
+    background-color: #4a5568;
+    border-color: var(--primary-color);
+}
+
+/* Status indicators */
+.status-pending {
+    color: var(--warning-color);
+}
+
+.status-submitted {
+    color: var(--info-color);
+}
+
+.status-graded {
+    color: var(--success-color);
+}
+
+.status-verified {
+    color: var(--success-color);
+}
+
+.status-rejected {
+    color: var(--danger-color);
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+nav {
+    position: sticky;
+    top: 0px;
+}
+[dark-theme="dark"] .text-muted {
+    color:#ffff;
+}

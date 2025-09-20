@@ -1,0 +1,9 @@
+/* Extra styling for register button */
+.login-card .btn-success {
+  background-color: var(--success-color);
+  border: none;
+}
+
+.login-card .btn-success:hover {
+  background-color: #157347;
+}

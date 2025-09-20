@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student ERP System</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="bi bi-mortarboard-fill me-2"></i>
+                Student ERP System
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" onclick="showSection('dashboard')">
+                            <i class="bi bi-house-fill me-1"></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('assignments')">
+                            <i class="bi bi-journal-text me-1"></i>Assignments
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('attendance')">
+                            <i class="bi bi-calendar-check me-1"></i>Attendance
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('progress')">
+                            <i class="bi bi-graph-up me-1"></i>Progress
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('certificates')">
+                            <i class="bi bi-award me-1"></i>Certificates
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="d-flex align-items-center">
+                    <!-- Theme Toggle -->
+                    <button class="btn btn-outline-light me-3" onclick="toggleTheme()">
+                        <i class="bi bi-moon-stars" id="theme-icon"></i>
+                    </button>
+                    
+                    <!-- Notifications -->
+                    <div class="dropdown me-3">
+                        <button class="btn btn-outline-light position-relative" type="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-bell"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="notification-badge">
+                                3
+                            </span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end notification-dropdown">
+                            <li><h6 class="dropdown-header">Notifications</h6></li>
+                            <li><a class="dropdown-item" href="#">
+                                <div class="d-flex">
+                                    <i class="bi bi-exclamation-triangle text-warning me-2"></i>
+                                    <div>
+                                        <strong>Assignment Due</strong>
+                                        <br><small class="text-muted">Math homework due tomorrow</small>
+                                    </div>
+                                </div>
+                            </a></li>
+                            <li><a class="dropdown-item" href="#">
+                                <div class="d-flex">
+                                    <i class="bi bi-check-circle text-success me-2"></i>
+                                    <div>
+                                        <strong>Grade Updated</strong>
+                                        <br><small class="text-muted">Physics lab report graded</small>
+                                    </div>
+                                </div>
+                            </a></li>
+                            <li><a class="dropdown-item" href="#">
+                                <div class="d-flex">
+                                    <i class="bi bi-info-circle text-primary me-2"></i>
+                                    <div>
+                                        <strong>Certificate Verified</strong>
+                                        <br><small class="text-muted">Python certificate approved</small>
+                                    </div>
+                                </div>
+                            </a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-center" href="#">View All</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Role Selector -->
+                    <select class="form-select form-select-sm me-3" id="roleSelector" onchange="switchRole(this.value)" style="width: auto;">
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                    
+                    <!-- User Profile -->
+                    <div class="dropdown">
+                        <button class="btn btn-outline-light" type="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-circle me-1"></i>
+                            <span id="current-user">John Doe</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Profile</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid py-4">
+        <!-- Dashboard Section -->
+        <div id="dashboard-section" class="content-section">
+            <div class="row mb-4">
+                <div class="col">
+                    <h1 class="display-6 fw-bold">Welcome back, <span id="welcome-name">John Doe</span>! 👋</h1>
+                    <p class="text-muted">Here's an overview of your academic progress and upcoming activities.</p>
+                </div>
+            </div>
+            
+            <!-- Stats Cards -->
+            <div class="row g-4 mb-5">
+                <div class="col-md-3">
+                    <div class="card stat-card border-0 shadow-sm h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="stat-icon bg-primary">
+                                    <i class="bi bi-calendar-check text-white"></i>
+                                </div>
+                                <div class="text-end">
+                                    <h3 class="mb-0 fw-bold">92%</h3>
+                                    <small class="text-muted">Attendance Rate</small>
+                                </div>
+                            </div>
+                            <p class="card-text text-muted mb-0">This semester</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card stat-card border-0 shadow-sm h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="stat-icon bg-warning">
+                                    <i class="bi bi-journal-text text-white"></i>
+                                </div>
+                                <div class="text-end">
+                                    <h3 class="mb-0 fw-bold">5</h3>
+                                    <small class="text-muted">Active Assignments</small>
+                                </div>
+                            </div>
+                            <p class="card-text text-muted mb-0">Due this week</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card stat-card border-0 shadow-sm h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="stat-icon bg-success">
+                                    <i class="bi bi-graph-up text-white"></i>
+                                </div>
+                                <div class="text-end">
+                                    <h3 class="mb-0 fw-bold">88.5</h3>
+                                    <small class="text-muted">Average Grade</small>
+                                </div>
+                            </div>
+                            <p class="card-text text-muted mb-0">Current semester</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card stat-card border-0 shadow-sm h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="stat-icon bg-info">
+                                    <i class="bi bi-award text-white"></i>
+                                </div>
+                                <div class="text-end">
+                                    <h3 class="mb-0 fw-bold">3</h3>
+                                    <small class="text-muted">Certificates</small>
+                                </div>
+                            </div>
+                            <p class="card-text text-muted mb-0">Verified</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activities -->
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-header bg-white border-0 pb-0">
+                            <h5 class="card-title mb-0">
+                                <i class="bi bi-clock text-warning me-2"></i>
+                                Upcoming Assignments
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="assignment-item p-3 rounded mb-3 border">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h6 class="mb-1">Calculus Problem Set #3</h6>
+                                        <p class="text-muted mb-0 small">Mathematics</p>
+                                    </div>
+                                    <span class="badge bg-warning">Due Tomorrow</span>
+                                </div>
+                            </div>
+                            <div class="assignment-item p-3 rounded mb-3 border">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h6 class="mb-1">Physics Lab Report</h6>
+                                        <p class="text-muted mb-0 small">Physics</p>
+                                    </div>
+                                    <span class="badge bg-primary">Due in 3 days</span>
+                                </div>
+                            </div>
+                            <div class="assignment-item p-3 rounded border">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h6 class="mb-1">Shakespeare Analysis</h6>
+                                        <p class="text-muted mb-0 small">English Literature</p>
+                                    </div>
+                                    <span class="badge bg-info">Due in 5 days</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-header bg-white border-0 pb-0">
+                            <h5 class="card-title mb-0">
+                                <i class="bi bi-check-circle text-success me-2"></i>
+                                Recent Grades
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="grade-item p-3 rounded mb-3 border">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-1">Chemistry Quiz #2</h6>
+                                        <p class="text-muted mb-0 small">Chemistry</p>
+                                    </div>
+                                    <span class="badge bg-success fs-6">94%</span>
+                                </div>
+                            </div>
+                            <div class="grade-item p-3 rounded mb-3 border">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-1">History Essay</h6>
+                                        <p class="text-muted mb-0 small">History</p>
+                                    </div>
+                                    <span class="badge bg-primary fs-6">87%</span>
+                                </div>
+                            </div>
+                            <div class="grade-item p-3 rounded border">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-1">Math Test</h6>
+                                        <p class="text-muted mb-0 small">Mathematics</p>
+                                    </div>
+                                    <span class="badge bg-warning fs-6">76%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Assignments Section -->
+        <div id="assignments-section" class="content-section d-none">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h1 class="display-6 fw-bold">Assignment Manager</h1>
+                    <p class="text-muted">View and manage your assignments</p>
+                </div>
+                <button class="btn btn-primary" id="create-assignment-btn" data-bs-toggle="modal" data-bs-target="#assignmentModal">
+                    <i class="bi bi-plus-circle me-2"></i>Create Assignment
+                </button>
+            </div>
+
+            <div class="row g-4" id="assignments-grid">
+                <!-- Assignment cards will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Attendance Section -->
+        <div id="attendance-section" class="content-section d-none">
+            <div class="row mb-4">
+                <div class="col">
+                    <h1 class="display-6 fw-bold">Attendance Tracker</h1>
+                    <p class="text-muted">Monitor your attendance records and trends</p>
+                </div>
+            </div>
+
+            <!-- Attendance Stats -->
+            <div class="row g-4 mb-5">
+                <div class="col-md-3">
+                    <div class="card stat-card border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="stat-icon bg-success mx-auto mb-3">
+                                <i class="bi bi-check-circle text-white"></i>
+                            </div>
+                            <h3 class="fw-bold">92%</h3>
+                            <p class="text-muted mb-0">Overall Attendance</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card stat-card border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="stat-icon bg-primary mx-auto mb-3">
+                                <i class="bi bi-calendar-check text-white"></i>
+                            </div>
+                            <h3 class="fw-bold">46</h3>
+                            <p class="text-muted mb-0">Present Days</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card stat-card border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="stat-icon bg-danger mx-auto mb-3">
+                                <i class="bi bi-x-circle text-white"></i>
+                            </div>
+                            <h3 class="fw-bold">4</h3>
+                            <p class="text-muted mb-0">Absent Days</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card stat-card border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="stat-icon bg-warning mx-auto mb-3">
+                                <i class="bi bi-exclamation-circle text-white"></i>
+                            </div>
+                            <h3 class="fw-bold">2</h3>
+                            <p class="text-muted mb-0">Excused Days</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-white">
+                            <h5 class="card-title mb-0">Subject-wise Attendance</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="attendanceChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-white">
+                            <h5 class="card-title mb-0">Attendance Distribution</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="attendancePieChart" width="300" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Section -->
+        <div id="progress-section" class="content-section d-none">
+            <div class="row mb-4">
+                <div class="col">
+                    <h1 class="display-6 fw-bold">Progress Tracker</h1>
+                    <p class="text-muted">Monitor your academic progress across all subjects</p>
+                </div>
+            </div>
+
+            <!-- Overall Progress Stats -->
+            <div class="row g-4 mb-5">
+                <div class="col-md-3">
+                    <div class="card stat-card border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="stat-icon bg-purple mx-auto mb-3">
+                                <i class="bi bi-award text-white"></i>
+                            </div>
+                            <h3 class="fw-bold">4.2</h3>
+                            <p class="text-muted mb-0">Overall GPA</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card stat-card border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="stat-icon bg-primary mx-auto mb-3">
+                                <i class="bi bi-journal-check text-white"></i>
+                            </div>
+                            <h3 class="fw-bold">85%</h3>
+                            <p class="text-muted mb-0">Assignment Completion</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card stat-card border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="stat-icon bg-success mx-auto mb-3">
+                                <i class="bi bi-graph-up text-white"></i>
+                            </div>
+                            <h3 class="fw-bold">92%</h3>
+                            <p class="text-muted mb-0">Attendance Rate</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card stat-card border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="stat-icon bg-info mx-auto mb-3">
+                                <i class="bi bi-trophy text-white"></i>
+                            </div>
+                            <h3 class="fw-bold">Excellent</h3>
+                            <p class="text-muted mb-0">Academic Standing</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subject Progress -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white">
+                    <h5 class="card-title mb-0">Subject-wise Progress</h5>
+                </div>
+                <div class="card-body" id="progress-subjects">
+                    <!-- Progress bars will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Certificates Section -->
+        <div id="certificates-section" class="content-section d-none">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h1 class="display-6 fw-bold">Certificate Verification</h1>
+                    <p class="text-muted">Upload and manage your certificates</p>
+                </div>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#certificateModal">
+                    <i class="bi bi-upload me-2"></i>Upload Certificate
+                </button>
+            </div>
+
+            <div class="row g-4" id="certificates-grid">
+                <!-- Certificate cards will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Assignment Modal -->
+    <div class="modal fade" id="assignmentModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create New Assignment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="assignmentForm">
+                        <div class="mb-3">
+                            <label for="assignmentTitle" class="form-label">Assignment Title</label>
+                            <input type="text" class="form-control" id="assignmentTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="assignmentSubject" class="form-label">Subject</label>
+                            <select class="form-select" id="assignmentSubject" required>
+                                <option value="">Select Subject</option>
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="Physics">Physics</option>
+                                <option value="Chemistry">Chemistry</option>
+                                <option value="English">English Literature</option>
+                                <option value="History">History</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="assignmentDescription" class="form-label">Description</label>
+                            <textarea class="form-control" id="assignmentDescription" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="assignmentDueDate" class="form-label">Due Date</label>
+                            <input type="datetime-local" class="form-control" id="assignmentDueDate" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="createAssignment()">Create Assignment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Certificate Modal -->
+    <div class="modal fade" id="certificateModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Upload Certificate</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="certificateForm">
+                        <div class="mb-3">
+                            <label for="certificateTitle" class="form-label">Certificate Title</label>
+                            <input type="text" class="form-control" id="certificateTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="certificateIssuer" class="form-label">Issuing Organization</label>
+                            <input type="text" class="form-control" id="certificateIssuer" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="certificateDate" class="form-label">Date Issued</label>
+                            <input type="date" class="form-control" id="certificateDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="certificateFile" class="form-label">Certificate File</label>
+                            <input type="file" class="form-control" id="certificateFile" accept=".pdf,.jpg,.jpeg,.png" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="uploadCertificate()">Upload Certificate</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
