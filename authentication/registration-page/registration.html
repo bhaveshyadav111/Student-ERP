@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration - Student ERP</title>
+    <link rel="stylesheet" href="registration.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">SE</div>
+            <h1>Student Registration</h1>
+            <p class="subtitle">Join our academic community. Fill out the form below to create your student account.</p>
+        </div>
+
+        <div class="form-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div class="success-message" id="successMessage">
+                <strong>Registration Successful!</strong> Your account has been created. Please check your email for verification instructions.
+            </div>
+
+            <form id="registrationForm">
+                <!-- Personal Information Section -->
+                <div class="form-section">
+                    <h3 class="section-title">Personal Information</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="firstName">First Name <span class="required">*</span></label>
+                            <input type="text" id="firstName" name="firstName" required>
+                            <div class="error-message" id="firstNameError">First name is required</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name <span class="required">*</span></label>
+                            <input type="text" id="lastName" name="lastName" required>
+                            <div class="error-message" id="lastNameError">Last name is required</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" required>
+                            <div class="error-message" id="emailError">Please enter a valid email address</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number <span class="required">*</span></label>
+                            <input type="tel" id="phone" name="phone" required>
+                            <div class="error-message" id="phoneError">Please enter a valid phone number</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="dateOfBirth">Date of Birth <span class="required">*</span></label>
+                            <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+                            <div class="error-message" id="dateOfBirthError">Date of birth is required</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Gender <span class="required">*</span></label>
+                            <select id="gender" name="gender" required>
+                                <option value="">Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                                <option value="prefer-not-to-say">Prefer not to say</option>
+                            </select>
+                            <div class="error-message" id="genderError">Please select your gender</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Academic Information Section -->
+                <div class="form-section">
+                    <h3 class="section-title">Academic Information</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="studentId">Student ID <span class="required">*</span></label>
+                            <input type="text" id="studentId" name="studentId" placeholder="e.g., 2024CS001" required>
+                            <div class="error-message" id="studentIdError">Student ID is required</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="course">Course/Program <span class="required">*</span></label>
+                            <select id="course" name="course" required>
+                                <option value="">Select Course</option>
+                                <option value="btech-cse">B.Tech Computer Science</option>
+                                <option value="btech-ece">B.Tech Electronics</option>
+                                <option value="btech-me">B.Tech Mechanical</option>
+                                <option value="btech-ce">B.Tech Civil</option>
+                                <option value="mtech-cse">M.Tech Computer Science</option>
+                                <option value="mba">MBA</option>
+                                <option value="bca">BCA</option>
+                                <option value="mca">MCA</option>
+                            </select>
+                            <div class="error-message" id="courseError">Please select your course</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="semester">Current Semester <span class="required">*</span></label>
+                            <select id="semester" name="semester" required>
+                                <option value="">Select Semester</option>
+                                <option value="1">1st Semester</option>
+                                <option value="2">2nd Semester</option>
+                                <option value="3">3rd Semester</option>
+                                <option value="4">4th Semester</option>
+                                <option value="5">5th Semester</option>
+                                <option value="6">6th Semester</option>
+                                <option value="7">7th Semester</option>
+                                <option value="8">8th Semester</option>
+                            </select>
+                            <div class="error-message" id="semesterError">Please select your semester</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="admissionYear">Admission Year <span class="required">*</span></label>
+                            <select id="admissionYear" name="admissionYear" required>
+                                <option value="">Select Year</option>
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
+                                <option value="2020">2020</option>
+                            </select>
+                            <div class="error-message" id="admissionYearError">Please select admission year</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Information Section -->
+                <div class="form-section">
+                    <h3 class="section-title">Contact Information</h3>
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label for="address">Address <span class="required">*</span></label>
+                            <textarea id="address" name="address" placeholder="Enter your complete address" required></textarea>
+                            <div class="error-message" id="addressError">Address is required</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City <span class="required">*</span></label>
+                            <input type="text" id="city" name="city" required>
+                            <div class="error-message" id="cityError">City is required</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="state">State <span class="required">*</span></label>
+                            <input type="text" id="state" name="state" required>
+                            <div class="error-message" id="stateError">State is required</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pincode">PIN Code <span class="required">*</span></label>
+                            <input type="text" id="pincode" name="pincode" pattern="[0-9]{6}" required>
+                            <div class="error-message" id="pincodeError">Please enter a valid 6-digit PIN code</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="parentContact">Parent/Guardian Contact</label>
+                            <input type="tel" id="parentContact" name="parentContact">
+                            <div class="error-message" id="parentContactError">Please enter a valid contact number</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Information Section -->
+                <div class="form-section">
+                    <h3 class="section-title">Account Information</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="password">Password <span class="required">*</span></label>
+                            <input type="password" id="password" name="password" required>
+                            <div class="error-message" id="passwordError">Password must be at least 8 characters</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password <span class="required">*</span></label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" required>
+                            <div class="error-message" id="confirmPasswordError">Passwords do not match</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="profilePhoto">Profile Photo (Optional)</label>
+                        <div class="file-upload">
+                            <input type="file" id="profilePhoto" name="profilePhoto" accept="image/*">
+                            <label for="profilePhoto" class="file-upload-label">
+                                <svg class="file-upload-icon" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 1H5C3.89 1 3 1.89 3 3V21C3 22.1 3.89 23 5 23H19C20.1 23 21 22.1 21 21V9H21ZM19 21H5V3H13V9H19V21Z"/>
+                                </svg>
+                                Choose Profile Photo
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I agree to the <a href="#" style="color: #667eea;">Terms and Conditions</a> and <a href="#" style="color: #667eea;">Privacy Policy</a> <span class="required">*</span></label>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <span class="loading-spinner" id="loadingSpinner"></span>
+                    <span id="btnText">Create Account</span>
+                </button>
+
+                <div class="login-link">
+                    Already have an account? <a href="../auth-page/auth.html">Login here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="registration.js"></script>
+</body>
+</html>

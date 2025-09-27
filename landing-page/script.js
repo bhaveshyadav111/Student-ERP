@@ -553,7 +553,7 @@ function initializeAttendancePieChart() {
     attendancePieChart = new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: ['Present', 'Absent', 'Excused'],
+            labels: ['Present', 'Absent', 'Medical Leave'],
             datasets: [{
                 data: [46, 4, 2],
                 backgroundColor: [

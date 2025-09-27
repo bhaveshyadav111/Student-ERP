@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForgotPage</title>
+    <link rel="stylesheet" href="forgot.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">SE</div>
+            <h1>Forgot Password?</h1>
+            <p class="subtitle">Don't worry! Enter your registered email address and we'll send you a link to reset your password.</p>
+        </div>
+
+        <div class="success-message" id="successMessage">
+            <strong>Success!</strong> Password reset link has been sent to your email address. Please check your inbox and spam folder.
+        </div>
+
+        <div class="error-message" id="errorMessage">
+            <strong>Error!</strong> <span id="errorText">Please enter a valid email address.</span>
+        </div>
+
+        <form id="forgotPasswordForm">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    placeholder="Enter your registered email address"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">
+                <span class="loading-spinner" id="loadingSpinner"></span>
+                <span id="btnText">Send Reset Link</span>
+            </button>
+        </form>
+
+        <div class="back-link">
+            <a href="../login-page/login.html" >
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+                Back to Login
+            </a>
+        </div>
+    </div>
+    <script src="forgot.js"></script>
+</body>
+</html>

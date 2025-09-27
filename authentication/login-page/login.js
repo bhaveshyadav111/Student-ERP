@@ -8,11 +8,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const rememberMeCheckbox = document.getElementById('rememberMe');
     const alertContainer = document.getElementById('alertContainer');
     const Btn = document.getElementsByTagName('button')
+    const signIn = document.getElementsByClassName('signIn')
 
     // Initialize
     init();
 
-    function init() {
+    function init(){
         // Load remembered email if exists
         loadRememberedCredentials();
         
@@ -23,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Real-time validation
         emailInput.addEventListener('input', validateEmail);
         Btn.addEventListener('click',validateEmail,validatePassword)
-        // passwordInput.addEventListener('input', validatePassword);
         
         // Auto-focus first empty field
         if (!emailInput.value) {
@@ -115,7 +115,6 @@ document.addEventListener('DOMContentLoaded', function() {
         setLoadingState(true);
         
         try {
-            // Simulate API call
             await simulateLogin(formData);
             
             // Handle successful login
@@ -129,13 +128,13 @@ document.addEventListener('DOMContentLoaded', function() {
             setLoadingState(false);
         }
     }
-
+// Credentials
     function simulateLogin(formData) {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 // Simulate different scenarios
-                if (formData.email === 'ybhavesh540@gmail.com' && formData.password === 'password123') {
-                    resolve({ success: true, message: 'Login successful!' });
+                if (formData.email === 'ybhavesh540@gmail.com' && formData.password === '123') {
+                    resolve({ success: true, message: 'Login successful!'});
                 } else {
                     reject(new Error('Invalid credentials'))
                 }
@@ -153,13 +152,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Show success message
         showAlert('Login successful! Redirecting to dashboard...', 'success');
-        
-        // Simulate redirect to dashboard
+        // Redirect to landing page after short delay
         setTimeout(() => {
-            // In a real application, you would redirect to the dashboard
-            showAlert('Redirecting to dashboard... (This is a demo)', 'success');
-        }, 2000);
-        
+            window.location.href = '../landing-page/index.html';
+        }, 1500);
         // Add success animation
         loginForm.style.transform = 'scale(0.98)';
         loginForm.style.opacity = '0.7';

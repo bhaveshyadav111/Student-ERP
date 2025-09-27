@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile - Student ERP</title>
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <div class="nav-logo">SE</div>
+            <span>Student ERP</span>
+        </div>
+        <div class="nav-links">
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="profile.html" class="nav-link active">Profile</a>
+            <a href="grades.html" class="nav-link">Grades</a>
+            <a href="attendance.html" class="nav-link">Attendance</a>
+            <div class="nav-dropdown">
+                <button class="nav-dropdown-btn">
+                    <img src="https://via.placeholder.com/32" alt="Profile" class="nav-avatar">
+                    <span>John Doe</span>
+                    <svg class="dropdown-arrow" viewBox="0 0 24 24">
+                        <path d="M7 10l5 5 5-5z"/>
+                    </svg>
+                </button>
+                <div class="nav-dropdown-content">
+                    <a href="#" onclick="logout()">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="profile-cover">
+                <button class="edit-cover-btn" id="editCoverBtn">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                    </svg>
+                    Edit Cover
+                </button>
+            </div>
+            
+            <div class="profile-info">
+                <div class="profile-picture-container">
+                    <img src="https://via.placeholder.com/120" alt="Profile Picture" class="profile-picture" id="profilePicture">
+                    <button class="edit-profile-pic-btn" id="editProfilePicBtn">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </button>
+                    <input type="file" id="profilePicInput" accept="image/*" style="display: none;">
+                </div>
+                
+                <div class="profile-details">
+                    <h1 class="student-name" id="studentName">John Doe Smith</h1>
+                    <p class="student-id" id="studentId">2024CS001</p>
+                    <p class="course-info" id="courseInfo">B.Tech Computer Science Engineering</p>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <span class="stat-number">3rd</span>
+                            <span class="stat-label">Semester</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">8.5</span>
+                            <span class="stat-label">CGPA</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">92%</span>
+                            <span class="stat-label">Attendance</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="profile-actions">
+                    <button class="edit-profile-btn" id="editProfileBtn">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                        </svg>
+                        Edit Profile
+                    </button>
+                    <button class="save-profile-btn" id="saveProfileBtn" style="display: none;">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Save Changes
+                    </button>
+                    <button class="cancel-edit-btn" id="cancelEditBtn" style="display: none;">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Content Tabs -->
+        <div class="profile-tabs">
+            <button class="tab-btn active" data-tab="personal">Personal Information</button>
+            <button class="tab-btn" data-tab="academic">Academic Details</button>
+            <button class="tab-btn" data-tab="contact">Contact Information</button>
+            <button class="tab-btn" data-tab="security">Account Security</button>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tab-content">
+            <!-- Personal Information Tab -->
+            <div class="tab-panel active" id="personal">
+                <div class="info-card">
+                    <h3>Personal Details</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>First Name</label>
+                            <input type="text" id="firstName" value="John" readonly>
+                        </div>
+                        <div class="info-item">
+                            <label>Last Name</label>
+                            <input type="text" id="lastName" value="Doe Smith" readonly>
+                        </div>
+                        <div class="info-item">
+                            <label>Date of Birth</label>
+                            <input type="date" id="dateOfBirth" value="2002-05-15" readonly>
+                        </div>
+                        <div class="info-item">
+                            <label>Gender</label>
+                            <select id="gender" disabled>
+                                <option value="male" selected>Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="info-item">
+                            <label>Blood Group</label>
+                            <input type="text" id="bloodGroup" value="O+" readonly>
+                        </div>
+                        <div class="info-item">
+                            <label>Nationality</label>
+                            <input type="text" id="nationality" value="Indian" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Academic Details Tab -->
+            <div class="tab-panel" id="academic">
+                <div class="info-card">
+                    <h3>Academic Information</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>Student ID</label>
+                            <input type="text" value="2024CS001" readonly>
+                        </div>
+                        <div class="info-item">
+                            <label>Course</label>
+                            <input type="text" value="B.Tech Computer Science" readonly>
+                        </div>
+                        <div class="info-item">
+                            <label>Current Semester</label>
+                            <input type="text" value="3rd Semester" readonly>
+                        </div>
+                        <div class="info-item">
+                            <label>Admission Year</label>
+                            <input type="text" value="2024" readonly>
+                        </div>
+                        <div class="info-item">
+                            <label>Current CGPA</label>
+                            <input type="text" value="8.5" readonly>
+                        </div>
+                        <div class="info-item">
+                            <label>Roll Number</label>
+                            <input type="text" value="24CSE001" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h3>Previous Education</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>12th School</label>
+                            <input type="text" id="school12" value="ABC Senior Secondary School" readonly>
+                        </div>
+                        <div class="info-item">
+                            <label>12th Percentage</label>
+                            <input type="text" id="percentage12" value="85.5%" readonly>
+                        </div>
+                        <div class="info-item">
+                            <label>10th School</label>
+                            <input type="text" id="school10" value="ABC High School" readonly>
+                        </div>
+                        <div class="info-item">
+                            <label>10th Percentage</label>
+                            <input type="text" id="percentage10" value="89.2%" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Information Tab -->
+            <div class="tab-panel" id="contact">
+                <div class="info-card">
+                    <h3>Contact Details</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>Email Address</label>
+                            <input type="email" id="email" value="john.doe@student.college.edu" readonly>
+                        </div>
+                        <div class="info-item">
+                            <label>Phone Number</label>
+                            <input type="tel" id="phone" value="+91 9876543210" readonly>
+                        </div>
+                        <div class="info-item full-width">
+                            <label>Current Address</label>
+                            <textarea id="currentAddress" readonly>123 Main Street, Sector 15, Jaipur, Rajasthan - 302015</textarea>
+                        </div>
+                        <div class="info-item full-width">
+                            <label>Permanent Address</label>
+                            <textarea id="permanentAddress" readonly>456 Park Avenue, Model Town, Delhi - 110009</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h3>Emergency Contact</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>Guardian Name</label>
+                            <input type="text" id="guardianName" value="Mr. Robert Smith" readonly>
+                        </div>
+                        <div class="info-item">
+                            <label>Relationship</label>
+                            <input type="text" id="relationship" value="Father" readonly>
+                        </div>
+                        <div class="info-item">
+                            <label>Guardian Phone</label>
+                            <input type="tel" id="guardianPhone" value="+91 9876543211" readonly>
+                        </div>
+                        <div class="info-item">
+                            <label>Guardian Email</label>
+                            <input type="email" id="guardianEmail" value="robert.smith@email.com" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Tab -->
+            <div class="tab-panel" id="security">
+                <div class="info-card">
+                    <h3>Account Security</h3>
+                    <div class="security-section">
+                        <div class="security-item">
+                            <div class="security-info">
+                                <h4>Password</h4>
+                                <p>Last changed 30 days ago</p>
+                            </div>
+                            <button class="change-password-btn" id="changePasswordBtn">Change Password</button>
+                        </div>
+                        
+                        <div class="security-item">
+                            <div class="security-info">
+                                <h4>Two-Factor Authentication</h4>
+                                <p>Not enabled</p>
+                            </div>
+                            <button class="enable-2fa-btn" id="enable2faBtn">Enable 2FA</button>
+                        </div>
+                        
+                        <div class="security-item">
+                            <div class="security-info">
+                                <h4>Login Sessions</h4>
+                                <p>3 active sessions</p>
+                            </div>
+                            <button class="view-sessions-btn" id="viewSessionsBtn">View Sessions</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Change Password Form (Hidden by default) -->
+                <div class="info-card password-change-card" id="passwordChangeCard" style="display: none;">
+                    <h3>Change Password</h3>
+                    <form id="passwordChangeForm">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <label>Current Password</label>
+                                <input type="password" id="currentPassword" required>
+                            </div>
+                            <div class="info-item">
+                                <label>New Password</label>
+                                <input type="password" id="newPassword" required>
+                            </div>
+                            <div class="info-item">
+                                <label>Confirm New Password</label>
+                                <input type="password" id="confirmNewPassword" required>
+                            </div>
+                        </div>
+                        <div class="password-actions">
+                            <button type="submit" class="save-password-btn">Update Password</button>
+                            <button type="button" class="cancel-password-btn" id="cancelPasswordBtn">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Message -->
+        <div class="success-message" id="successMessage">
+            <svg viewBox="0 0 24 24">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span>Profile updated successfully!</span>
+        </div>
+    </div>
+
+    <script src="profile.js"></script>
+</body>
+</html>
