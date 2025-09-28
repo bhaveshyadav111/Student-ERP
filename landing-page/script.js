@@ -398,6 +398,9 @@ function getCertificateActionButtons(certificate) {
             </button>
         `;
     }
+    if ((currentRole === 'student')) {
+
+    }   
     
     return buttons;
 }

@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
         showAlert('Login successful! Redirecting to dashboard...', 'success');
         // Redirect to landing page after short delay
         setTimeout(() => {
-            window.location.href = '../landing-page/index.html';
+            window.location.href = '/web_dev/landing-page/index.html';
         }, 1500);
         // Add success animation
         loginForm.style.transform = 'scale(0.98)';
